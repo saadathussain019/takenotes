@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1069154753304",
+    "project_id": "takenotes-flutter-project01",
+    "storage_bucket": "takenotes-flutter-project01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069154753304:android:44d37a8ff5fb45be991c6d",
+        "android_client_info": {
+          "package_name": "com.tadaas.takenotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2wY210IUUvjHRQhitBnwpR49CUf9TCoY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
