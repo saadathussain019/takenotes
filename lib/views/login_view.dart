@@ -33,62 +33,69 @@ late final TextEditingController _email;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Log In'),
+        backgroundColor: Colors.purple,
+        foregroundColor: Colors.white,
         ),
-      body: Column(
-                  children: [
-                    TextField(
-                      controller: _email,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration:
-                          const InputDecoration(hintText: 'Enter your Email'),
-                    ),
-                    TextField(
-                      controller: _password,
-                      obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      decoration:
-                          const InputDecoration(hintText: 'Enter your Password'),
-                    ),
+
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+                    children: [
+                      TextField(
+                        controller: _email,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration:
+                            const InputDecoration(hintText: 'Enter your Email'),
+                      ),
+                      TextField(
+                        controller: _password,
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        decoration:
+                            const InputDecoration(hintText: 'Enter your Password'),
+                      ),
+                      TextButton(
+                          onPressed: () async {
+                            final email = _email.text;
+                            final password = _password.text;
+                            try{
+                              final userCredential = await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: email, password: password);
+                              // ignore: use_build_context_synchronously
+                              print(userCredential);
+                            } on FirebaseAuthException catch(e) {
+                              if (e.code == 'user-not-found'){
+                                print('User not found');
+                              }
+                              else if (e.code == 'wrong-password'){
+                                print('Wrong Password');
+                              }
+                              else{
+                                print(e.code);
+                              }
+                            }
+                            // catch (e) {
+                            //   print('Something bad happened..');
+                            //   print(e);
+                            //   print(e.runtimeType);
+                            // }
+                          },
+                          child: const Text("Log In")),
                     TextButton(
-                        onPressed: () async {
-                          final email = _email.text;
-                          final password = _password.text;
-                          try{
-                            final userCredential = await FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                                  email: email, password: password);
-                            print(userCredential);
-                          } on FirebaseAuthException catch(e) {
-                            if (e.code == 'user-not-found'){
-                              print('User not found');
-                            }
-                            else if (e.code == 'wrong-password'){
-                              print('Wrong Password');
-                            }
-                            else{
-                              print(e.code);
-                            }
-                          }
-                          // catch (e) {
-                          //   print('Something bad happened..');
-                          //   print(e);
-                          //   print(e.runtimeType);
-                          // }
-                        },
-                        child: const Text("Log In")),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/register/',
-                        (route) => false);
-                    },
-                    child: const Text('Not registered yet! Click to Sign Up!'),
-                  )
-                  ],
-                ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/register/',
+                          (route) => false);
+                      },
+                      child: const Text('Not registered yet! Click to Sign Up!'),
+                    )
+                    ],
+                  ),
+      ),
     );
   }
 }
