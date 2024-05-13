@@ -24,6 +24,7 @@ void main() {
         loginRoute: (context) => const LoginView(),
         registerRoute: (context) => const RegisterView(),
         notesRoute: (context) => const NotesView(),
+        verifyEmailRoute: (context) => const VerifyEmailView(),
       },
     ),
   );
@@ -104,7 +105,7 @@ class _NotesView extends State<NotesView> {
           ],
           foregroundColor: Colors.white,
           backgroundColor: Colors.purple),
-      body: const Text('Hello World!'),
+      body: const Text('Hello world!'),
     );
   }
 }
