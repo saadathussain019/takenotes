@@ -1,9 +1,8 @@
 //Imports
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as devtools show log;
-
 import 'package:takenotes/constants/routes.dart';
+import 'package:takenotes/utilities/show_error_dialog.dart';
 
 //LogIn View class:
 class LoginView extends StatefulWidget {
@@ -73,18 +72,37 @@ class _LoginViewState extends State<LoginView> {
                     );
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
-                      devtools.log("User not found!");
+                      await showErrorDialog(
+                        context,
+                        'User not found',
+                      );
                     } else if (e.code == 'invalid-credential') {
-                      devtools.log('Wrong Username or Password');
+                      await showErrorDialog(
+                        context,
+                        'Invalid Credentials',
+                      );
+                    } else if (e.code == 'channel-error') {
+                      await showErrorDialog(
+                        context,
+                        'Username or Password not entered',
+                      );
+                    } else if (e.code == 'invalid-email') {
+                      await showErrorDialog(
+                        context,
+                        'Invalid Email',
+                      );
                     } else {
-                      devtools.log(e.code.toString());
+                      await showErrorDialog(
+                        context,
+                        'Error: ${e.code}',
+                      );
                     }
+                  } catch (e) {
+                    await showErrorDialog(
+                      context,
+                      'Error: ${e.toString()}',
+                    );
                   }
-                  // catch (e) {
-                  //   print('Something bad happened..');
-                  //   print(e);
-                  //   print(e.runtimeType);
-                  // }
                 },
                 child: const Text("Log In")),
             TextButton(
