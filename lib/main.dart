@@ -30,7 +30,7 @@ void main() {
   );
 }
 
-//homepage view
+//homepage viewt
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
