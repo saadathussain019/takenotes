@@ -63,4 +63,7 @@ dependencies added in pubspec.yaml
   firebase_auth: ^4.19.4
   cloud_firestore: ^4.17.2
   firebase_analytics: ^10.10.4
+  sqflite: ^2.3.3+1
+  path_provider: ^2.1.3
+  path: ^1.9.0
 */
