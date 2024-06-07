@@ -63,7 +63,7 @@ dependencies added in pubspec.yaml
   cupertino_icons: ^1.0.6
   firebase_core: ^2.30.1
   firebase_auth: ^4.19.4
-  cloud_firestore: ^4.17.2
+  cloud_firestore: ^4.17.2 
   firebase_analytics: ^10.10.4
   sqflite: ^2.3.3+1
   path_provider: ^2.1.3
