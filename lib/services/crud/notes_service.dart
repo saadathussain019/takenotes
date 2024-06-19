@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' show join;
 import 'package:sqflite/sqlite_api.dart';
 import 'package:takenotes/extensions/list/filter.dart';
-import 'package:takenotes/services/auth/crud/crud_exceptions.dart';
+import 'package:takenotes/services/crud/crud_exceptions.dart';
 
 class NotesService {
   Database? _db;
