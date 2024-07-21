@@ -6,7 +6,6 @@ import 'package:takenotes/services/auth/bloc/auth_bloc.dart';
 import 'package:takenotes/services/auth/bloc/auth_event.dart';
 import 'package:takenotes/services/auth/bloc/auth_state.dart';
 import 'package:takenotes/utilities/dialogs/error_dialog.dart';
-import 'package:takenotes/utilities/dialogs/loading_dialog.dart';
 
 //LogIn View class:
 class LoginView extends StatefulWidget {
@@ -40,9 +39,11 @@ class _LoginViewState extends State<LoginView> {
       listener: (context, state) async {
         if (state is AuthStateLoggedOut) {
           if (state.exception is UserNotFoundAuthException) {
-            await showErrorDialog(context, 'User not found');
+            await showErrorDialog(
+                context, 'Cannot find a user with the entered credentials');
           } else if (state.exception is InvalidCredentialsAuthException) {
-            await showErrorDialog(context, 'Invalid credentials');
+            await showErrorDialog(
+                context, 'Cannot find a user with the entered credentials');
           } else if (state.exception is NoCredentialsAuthException) {
             await showErrorDialog(context, 'Username or password not entered');
           } else if (state.exception is InvalidEmailAuthException) {
@@ -59,15 +60,19 @@ class _LoginViewState extends State<LoginView> {
           foregroundColor: Colors.white,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
+              const Text(
+                'Please log in to your account in order to create and interact with your notes!',
+              ),
               TextField(
                 controller: _email,
                 enableSuggestions: false,
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(hintText: 'Enter your Email'),
+                decoration:
+                    const InputDecoration(hintText: 'Enter your email here'),
               ),
               TextField(
                 controller: _password,
@@ -75,7 +80,7 @@ class _LoginViewState extends State<LoginView> {
                 enableSuggestions: false,
                 autocorrect: false,
                 decoration:
-                    const InputDecoration(hintText: 'Enter your Password'),
+                    const InputDecoration(hintText: 'Enter your password here'),
               ),
               TextButton(
                 onPressed: () async {
@@ -88,7 +93,15 @@ class _LoginViewState extends State<LoginView> {
                         ),
                       );
                 },
-                child: const Text('Login'),
+                child: const Text('LOGIN'),
+              ),
+              TextButton(
+                onPressed: () {
+                  context.read<AuthBloc>().add(
+                        const AuthEventForgotPassword(),
+                      );
+                },
+                child: const Text('Forgot Password?'),
               ),
               TextButton(
                 onPressed: () {
