@@ -29,7 +29,7 @@ void main() {
         child: const HomePage(),
       ),
       routes: {
-        //Routes below no longer needed as shifted to Bloc
+        //Routes below no longer needed as shifted to Bloc State Manangement
         // loginRoute: (context) => const LoginView(),
         // registerRoute: (context) => const RegisterView(),
         // notesRoute: (context) => const NotesView(),
